@@ -27,7 +27,7 @@ public class Worker {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} finally {
-				channel.basicAck(0, true);
+				channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
 				System.out.println("[x] Hecho.");
 			}
 		};

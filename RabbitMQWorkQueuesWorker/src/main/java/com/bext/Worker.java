@@ -13,7 +13,10 @@ public class Worker {
 		factory.setHost("localhost");
 		Connection connection = factory.newConnection();
 		Channel channel = connection.createChannel();
-		channel.queueDeclare(TASK_QUEUE_NAME, false, false, false, null);
+		boolean durable = true;
+		channel.queueDeclare(TASK_QUEUE_NAME, durable, false, false, null);
+		int prefetchCount = 1;
+		channel.basicQos(prefetchCount);
 		System.out.println("Esperando por mensajes... CTRL+C para salir.");
 		
 		DeliverCallback deliverCallback = (consumerTag, delivery) -> {

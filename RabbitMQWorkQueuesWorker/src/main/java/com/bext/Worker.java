@@ -27,13 +27,19 @@ public class Worker {
 				System.out.println("[x] Hecho.");
 			}
 		};
-		boolean autoAck = true; // acknowledgment 
+		
+		if (args.length > 0)     
+			System.out.println("se proporciono un parametro, autoAck DEShabilitado.");
+		else
+			System.out.println("No se proporciono un parametro, autoAck Habilitado");
+		boolean autoAck = (args.length > 0); // acknowledgment 
 		channel.basicConsume(TASK_QUEUE_NAME, autoAck, deliverCallback, consumerTag->{});
 	}
 	
 	private static void doWork(String task) throws InterruptedException {
 		for (char ch: task.toCharArray()) {
 			if ( ch == '.') Thread.sleep(1000);
+			if ( ch == '*') System.exit(1);
 		}
 	}
 }

@@ -19,5 +19,4 @@ public class NewTask {
 			System.out.println(" [x] enviado '" + message + "'");
 		}
 	}
-
 }

@@ -24,6 +24,7 @@ public class Worker {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} finally {
+				channel.basicAck(0, true);
 				System.out.println("[x] Hecho.");
 			}
 		};
